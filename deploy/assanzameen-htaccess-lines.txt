@@ -1,0 +1,6 @@
+    # School domains (aischoolofsciences.com waghera) -> MSK Devs software, through msk-bridge
+    # assanzameen.com, www aur iske subdomains is se bahar hain. SSL ki files bhi.
+    RewriteCond %{HTTP_HOST} !(^|\.)assanzameen\.com$ [NC]
+    RewriteCond %{REQUEST_URI} !^/msk-bridge/
+    RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/
+    RewriteRule ^ msk-bridge/index.php [L]

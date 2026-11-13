@@ -1,0 +1,25 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-B1VkZ4HV.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BODvRAeW.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/sales-app.js": {
+    "file": "assets/sales-app-DNZBx2lT.js",
+    "name": "sales-app",
+    "src": "resources/js/sales-app.js",
+    "isEntry": true
+  },
+  "resources/js/site.js": {
+    "file": "assets/site-BKjEX3M4.js",
+    "name": "site",
+    "src": "resources/js/site.js",
+    "isEntry": true
+  }
+}

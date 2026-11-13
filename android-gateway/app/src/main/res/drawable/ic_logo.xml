@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- MSK SMS Gateway: a phone with a message bubble, on the brand green. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#0A2F2A" android:pathData="M54,4a50,50 0,1 1,0 100a50,50 0,1 1,0 -100z" />
+    <path android:fillColor="#115E52" android:pathData="M54,10a44,44 0,1 1,0 88a44,44 0,1 1,0 -88z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M38,28h24a5,5 0,0 1,5 5v42a5,5 0,0 1,-5 5h-24a5,5 0,0 1,-5 -5v-42a5,5 0,0 1,5 -5z" />
+    <path android:fillColor="#0A2F2A" android:pathData="M38,35h24v34h-24z" />
+    <path android:fillColor="#0A2F2A" android:pathData="M47,73.5h6a1.5,1.5 0,0 1,0 3h-6a1.5,1.5 0,0 1,0 -3z" />
+    <path android:fillColor="#10B981" android:pathData="M58,40h20a6,6 0,0 1,6 6v12a6,6 0,0 1,-6 6h-9l-7,6v-6h-4a6,6 0,0 1,-6 -6v-12a6,6 0,0 1,6 -6z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M60,47h16v3h-16zM60,53h11v3h-11z" />
+</vector>

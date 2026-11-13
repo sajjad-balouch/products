@@ -1,0 +1,6 @@
+com.mskdevs.smsgateway
+color brand
+drawable ic_launcher
+drawable ic_launcher_foreground
+drawable ic_logo
+drawable ic_stat_sms

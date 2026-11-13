@@ -1,0 +1,116 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.mskdevs.smsgateway"
+4    android:versionCode="2"
+5    android:versionName="2.0" >
+6
+7    <uses-sdk
+7-->INJECTED
+8        android:minSdkVersion="24"
+8-->INJECTED
+9        android:targetSdkVersion="36" />
+9-->INJECTED
+10
+11    <uses-feature
+11-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:4:5-87
+12        android:name="android.hardware.telephony"
+12-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:4:19-60
+13        android:required="true" />
+13-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:4:61-84
+14
+15    <uses-permission android:name="android.permission.SEND_SMS" />
+15-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:6:5-67
+15-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:6:22-64
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:7:5-67
+16-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:7:22-64
+17    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+17-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:8:5-79
+17-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:8:22-76
+18    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+18-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:9:5-77
+18-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:9:22-74
+19    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+19-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:10:5-89
+19-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:10:22-86
+20    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+20-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:11:5-77
+20-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:11:22-74
+21    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+21-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:12:5-81
+21-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:12:22-78
+22    <uses-permission android:name="android.permission.WAKE_LOCK" />
+22-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:13:5-68
+22-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:13:22-65
+23    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+23-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:14:5-95
+23-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:14:22-92
+24    <!-- usesCleartextTraffic: for testing on office WiFi (http://192.168.x.x). The live server uses https. -->
+25    <application
+25-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:17:5-51:19
+26        android:allowBackup="false"
+26-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:18:9-36
+27        android:extractNativeLibs="false"
+27-->INJECTED
+28        android:icon="@drawable/ic_launcher"
+28-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:20:9-45
+29        android:label="MSK SMS Gateway"
+29-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:19:9-40
+30        android:roundIcon="@drawable/ic_launcher"
+30-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:21:9-50
+31        android:theme="@android:style/Theme.Material.Light.NoActionBar"
+31-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:22:9-72
+32        android:usesCleartextTraffic="true" >
+32-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:23:9-44
+33        <activity
+33-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:25:9-33:20
+34            android:name="com.mskdevs.smsgateway.MainActivity"
+34-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:26:13-41
+35            android:exported="true"
+35-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:28:13-36
+36            android:windowSoftInputMode="adjustResize" >
+36-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:27:13-55
+37            <intent-filter>
+37-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:29:13-32:29
+38                <action android:name="android.intent.action.MAIN" />
+38-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:30:17-69
+38-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:30:25-66
+39
+40                <category android:name="android.intent.category.LAUNCHER" />
+40-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:31:17-77
+40-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:31:27-74
+41            </intent-filter>
+42        </activity>
+43
+44        <service
+44-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:35:9-42:19
+45            android:name="com.mskdevs.smsgateway.GatewayService"
+45-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:36:13-43
+46            android:exported="false"
+46-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:37:13-37
+47            android:foregroundServiceType="specialUse" >
+47-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:38:13-55
+48            <property
+48-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:39:13-41:98
+49                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+49-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:40:17-76
+50                android:value="Sends SMS queued by the owner&apos;s own school and business server" />
+50-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:41:17-95
+51        </service>
+52
+53        <receiver
+53-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:44:9-50:20
+54            android:name="com.mskdevs.smsgateway.BootReceiver"
+54-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:45:13-41
+55            android:exported="true" >
+55-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:46:13-36
+56            <intent-filter>
+56-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:47:13-49:29
+57                <action android:name="android.intent.action.BOOT_COMPLETED" />
+57-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:48:17-79
+57-->D:\xamp\htdocs\darsgah\android-gateway\app\src\main\AndroidManifest.xml:48:25-76
+58            </intent-filter>
+59        </receiver>
+60    </application>
+61
+62</manifest>

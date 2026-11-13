@@ -1,0 +1,5 @@
+int color brand 0x7f010000
+int drawable ic_launcher 0x7f020000
+int drawable ic_launcher_foreground 0x7f020001
+int drawable ic_logo 0x7f020002
+int drawable ic_stat_sms 0x7f020003

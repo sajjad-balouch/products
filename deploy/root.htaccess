@@ -1,0 +1,43 @@
+# MSK Devs - the site runs from this folder; CSS, JS and images are in public/.
+# Works at a domain root (products.assanzameen.com) and in a sub folder (localhost/darsgah).
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+
+# Hidden files (.env, .htaccess) and app files are never served. .well-known stays open for the domain check and SSL.
+<FilesMatch "^\.(?!well-known$)|\.(env|log|sql|lock|md|ini|sh|xml|yml|yaml|cache)$|^(artisan|composer\.json|package\.json|package-lock\.json|vite\.config\.js)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # App folders: block any real file inside them.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^(app|bootstrap|config|database|lang|resources|routes|storage|vendor|node_modules|tests|tools|deploy|android|promo-videos)(/.*)?$ - [F,L]
+
+    # /public/... pages (not files) and public/index.php go to the clean address.
+    RewriteCond %{REQUEST_URI} ^(.*?)/public/index\.php$
+    RewriteRule ^public/index\.php$ %1/ [R=301,L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} ^(.*?)/public(/.*)?$
+    RewriteRule ^public(/.*)?$ %1%2 [R=301,L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

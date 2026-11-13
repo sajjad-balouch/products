@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "com.mskdevs.smsgateway.app-release-3:/drawable_ic_logo.xml.flat",
+        "source": "com.mskdevs.smsgateway.app-main-4:/drawable/ic_logo.xml"
+    },
+    {
+        "merged": "com.mskdevs.smsgateway.app-release-3:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.mskdevs.smsgateway.app-main-4:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.mskdevs.smsgateway.app-release-3:/drawable_ic_launcher.xml.flat",
+        "source": "com.mskdevs.smsgateway.app-main-4:/drawable/ic_launcher.xml"
+    },
+    {
+        "merged": "com.mskdevs.smsgateway.app-release-3:/drawable-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.mskdevs.smsgateway.app-main-4:/drawable-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.mskdevs.smsgateway.app-release-3:/drawable_ic_stat_sms.xml.flat",
+        "source": "com.mskdevs.smsgateway.app-main-4:/drawable/ic_stat_sms.xml"
+    }
+]

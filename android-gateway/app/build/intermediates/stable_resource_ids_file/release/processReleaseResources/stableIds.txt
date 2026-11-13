@@ -1,0 +1,5 @@
+com.mskdevs.smsgateway:drawable/ic_launcher_foreground = 0x7f020001
+com.mskdevs.smsgateway:drawable/ic_stat_sms = 0x7f020003
+com.mskdevs.smsgateway:drawable/ic_logo = 0x7f020002
+com.mskdevs.smsgateway:drawable/ic_launcher = 0x7f020000
+com.mskdevs.smsgateway:color/brand = 0x7f010000

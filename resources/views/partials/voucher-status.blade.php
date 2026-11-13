@@ -1,0 +1,1 @@
+<span @class(['badge', 'badge-green' => $status === 'paid', 'badge-amber' => $status === 'partial', 'badge-red' => $status === 'unpaid', 'badge-slate' => $status === 'void'])>{{ __(ucfirst($status)) }}</span>

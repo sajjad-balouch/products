@@ -1,0 +1,8 @@
+com.mskdevs.smsgateway.app-pngs-0 D:\xamp\htdocs\darsgah\android-gateway\app\build\generated\res\pngs\release
+com.mskdevs.smsgateway.app-updated_navigation_xml-1 D:\xamp\htdocs\darsgah\android-gateway\app\build\generated\updated_navigation_xml\release
+com.mskdevs.smsgateway.app-packageReleaseResources-2 D:\xamp\htdocs\darsgah\android-gateway\app\build\intermediates\incremental\release\packageReleaseResources\merged.dir
+com.mskdevs.smsgateway.app-packageReleaseResources-3 D:\xamp\htdocs\darsgah\android-gateway\app\build\intermediates\incremental\release\packageReleaseResources\stripped.dir
+com.mskdevs.smsgateway.app-release-4 D:\xamp\htdocs\darsgah\android-gateway\app\build\intermediates\merged_res\release\mergeReleaseResources
+com.mskdevs.smsgateway.app-main-5 D:\xamp\htdocs\darsgah\android-gateway\app\src\main\res
+com.mskdevs.smsgateway.app-release-6 D:\xamp\htdocs\darsgah\android-gateway\app\src\release\res
+gradleHome-0 C:\Users\Sajjad Chandia\.gradle

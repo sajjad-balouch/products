@@ -1,0 +1,4 @@
+#Fri Nov 13 00:01:09 PKT 2026
+base.0=D\:\\xamp\\htdocs\\darsgah\\android-gateway\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
