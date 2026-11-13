@@ -90,6 +90,10 @@
                         <i x-html="ic(syncing ? 'refresh' : (online ? 'wifi' : 'wifiOff'), 'h-4 w-4 ' + (syncing ? 'animate-spin' : ''))"></i>
                         <span x-text="syncing ? 'Updating' : (online ? 'Online' : 'Offline')"></span>
                     </button>
+                    <button x-on:click="openBell()" class="press relative grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/10" aria-label="Notifications">
+                        <i x-html="ic('bell', 'h-5 w-5')"></i>
+                        <span x-show="badge" class="absolute -top-1 -right-1 grid h-5 min-w-5 place-items-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white ring-2 ring-brand-900" x-text="bubble(badge)"></span>
+                    </button>
                     <button x-on:click="go('more')" class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white text-sm font-bold text-brand-800" x-text="initials(me?.name)" aria-label="Account"></button>
                 </div>
             </header>
@@ -296,8 +300,7 @@
                                 <button x-on:click="go(key)" class="relative flex w-full flex-col items-center gap-0.5 pt-2 pb-1.5 text-[11px] font-medium" :class="tab === key ? 'text-brand-700' : 'text-slate-500'">
                                     <span class="grid h-8 w-14 place-items-center rounded-full transition-colors" :class="tab === key ? 'bg-brand-100' : ''" x-html="ic(iconName, 'h-5 w-5')"></span>
                                     <span x-text="label"></span>
-                                    <span x-show="key === 'orders' && (isOwner ? summary.new : outbox.length)" class="absolute top-1 right-[18%] grid h-5 min-w-5 place-items-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white" x-text="isOwner ? summary.new : outbox.length"></span>
-                                </button>
+                                    <span x-show="key === 'orders' && badge" class="absolute top-1 right-[16%] grid h-5 min-w-5 place-items-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white ring-2 ring-white" x-text="bubble(badge)"></span>                                </button>
                             </template>
                         </div>
                     </template>

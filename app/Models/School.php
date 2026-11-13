@@ -53,7 +53,7 @@ class School extends Model
     }
 
     /** The only screens a business (rather than a school) uses. */
-    public const BUSINESS_ROUTES = ['biz.*', 'app', 'app.*', 'messages.*', 'users', 'audit', 'website.*', 'site.*', 'logout', 'password.change', 'subscription.expired', 'impersonation.stop', 'locale', '*livewire.*'];
+    public const BUSINESS_ROUTES = ['biz.*', 'app', 'app.*', 'badges', 'messages.*', 'users', 'audit', 'website.*', 'site.*', 'logout', 'password.change', 'subscription.expired', 'impersonation.stop', 'locale', '*livewire.*'];
 
     protected $guarded = [];
 

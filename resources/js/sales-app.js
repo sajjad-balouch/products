@@ -140,6 +140,10 @@ window.salesApp = () => ({
         history.replaceState({ app: true }, '');
         history.pushState({ app: true }, '');
         this.$watch('cart', (v) => save('cart', v), { deep: true });
+        CFG.title = document.title;
+        this.$watch('badge', () => this.paintBadge());
+        this.$watch('token', () => this.paintBadge());
+        this.paintBadge();
         if (this.token) this.sync(true);
         setInterval(() => this.sync(), 30000);
     },
@@ -153,6 +157,16 @@ window.salesApp = () => ({
     get title() { return ({ home: this.me?.business || '', orders: 'Orders', customers: 'Customers', more: 'More' })[this.tab]; },
 
     get isOwner() { return this.me?.role === 'owner'; },
+    // The red count: orders the owner has not accepted yet, or a salesman's orders still on the phone.
+    get badge() { return this.isOwner ? (this.summary.new || 0) + this.failed.length : this.outbox.length + this.failed.length; },
+    bubble(n) { return n > 99 ? '99+' : n; },
+    // On the app icon (where the phone allows it) and in the page title.
+    paintBadge() {
+        const n = this.token ? this.badge : 0;
+        document.title = (n ? '(' + this.bubble(n) + ') ' : '') + (CFG.title || document.title.replace(/^\(\d+\+?\)\s*/, ''));
+        try { if ('setAppBadge' in navigator) (n ? navigator.setAppBadge(n) : navigator.clearAppBadge()).catch(() => {}); } catch (e) {}
+    },
+    openBell() { this.stack = []; this.filter = this.isOwner ? 'new' : (this.outbox.length ? 'waiting' : 'all'); this.go('orders'); },
     get firstName() { return (this.me?.name || '').split(' ')[0]; },
     get greeting() { const h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; },
     get cartTotal() { return this.cart.lines.reduce((s, l) => s + (Number(l.qty) || 0) * (Number(l.price) || 0), 0); },

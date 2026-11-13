@@ -94,7 +94,9 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('role:parent,student')->get('/portal', Livewire\Portal\Home::class)->name('portal');
 
-    Route::get('/subscription-ended', fn () => Auth::user()->school?->isLocked() ? view('subscription-expired') : redirect()->route(Auth::user()->homeRoute()))->name('subscription.expired');
+    // The red counts beside menu links and on the bell, refreshed every minute while a page is open.
+    Route::get('/badges', fn () => response()->json(['badges' => \App\Support\Badges::for(Auth::user()), 'list' => \App\Support\Badges::list(Auth::user())]))->name('badges');
+    Route::get('/subscription-ended',fn () => Auth::user()->school?->isLocked() ? view('subscription-expired') : redirect()->route(Auth::user()->homeRoute()))->name('subscription.expired');
 
     Route::post('/impersonation/stop', function () {
         $schoolId = Impersonation::stop();

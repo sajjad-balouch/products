@@ -29,7 +29,15 @@
     </header>
     <main class="mx-auto max-w-3xl px-4 py-4">{{ $slot }}</main>
 @else
-    <div class="lg:flex">
+    @php($badges = \App\Support\Badges::for($user))
+    {{-- Red counts: drawn now, then refreshed every minute without reloading the page. --}}
+    <div class="lg:flex" x-data="{
+            badges: @js($badges), list: @js(\App\Support\Badges::list($user)), bell: false, title: document.title.replace(/^\(\d+\+?\)\s*/, ''),
+            get total() { return Object.values(this.badges).reduce((s, n) => s + n, 0) },
+            show(n) { return n > 99 ? '99+' : n },
+            paint() { document.title = (this.total ? '(' + this.show(this.total) + ') ' : '') + this.title },
+            async refresh() { try { const r = await fetch(@js(route('badges')), { headers: { Accept: 'application/json' } }); if (r.ok) { const b = await r.json(); this.badges = b.badges; this.list = b.list; this.paint() } } catch (e) {} },
+        }" x-init="paint(); setInterval(() => document.visibilityState === 'visible' && refresh(), 60000); document.addEventListener('visibilitychange', () => document.visibilityState === 'visible' && refresh())">
         <div x-show="nav" x-cloak class="fixed inset-0 z-30 bg-black/40 lg:hidden" @click="nav = false"></div>
         @php($roleLabel = ['super_admin' => 'Software owner', 'admin' => $user->school?->isBusiness() ? 'Owner' : 'Principal / Admin', 'accountant' => 'Accountant', 'teacher' => 'Teacher', 'website_editor' => 'Website editor'][$user->role] ?? ucfirst($user->role))
         @php($initials = collect(preg_split('/\s+/', trim($user->name)))->filter()->take(2)->map(fn ($w) => mb_strtoupper(mb_substr($w, 0, 1)))->implode(''))
@@ -52,6 +60,7 @@
                                 <a href="{{ route($route) }}" wire:navigate @class(['nav-link', 'nav-active' => request()->routeIs($route)]) @if (request()->routeIs($route)) aria-current="page" @endif>
                                     <x-icon :name="\App\Support\Navigation::icon($route)" class="h-[18px] w-[18px] shrink-0 opacity-90" />
                                     <span class="truncate">{{ $label }}</span>
+                                    <span x-show="badges[@js($route)]" @if (! isset($badges[$route])) x-cloak @endif class="ms-auto grid h-5 min-w-5 shrink-0 place-items-center rounded-full bg-red-500 px-1.5 text-[11px] leading-none font-bold text-white shadow-sm" x-text="show(badges[@js($route)])">{{ isset($badges[$route]) ? \App\Support\Badges::text($badges[$route]) : '' }}</span>
                                 </a>
                             @endforeach
                         </div>
@@ -72,9 +81,29 @@
 
         <div class="min-w-0 flex-1">
             <header class="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-slate-200/80 bg-white/90 px-4 py-2.5 backdrop-blur no-print lg:px-6">
-                <button class="flex items-center gap-2 rounded-lg border border-slate-200 px-2.5 py-1.5 text-sm font-medium text-slate-700 lg:hidden" @click="nav = true" aria-label="Open menu"><x-icon name="menu" /> Menu</button>
+                <button class="relative flex items-center gap-2 rounded-lg border border-slate-200 px-2.5 py-1.5 text-sm font-medium text-slate-700 lg:hidden" @click="nav = true" aria-label="Open menu"><x-icon name="menu" /> Menu
+                    <span x-show="total" @if (! $badges) x-cloak @endif class="absolute -top-1.5 -end-1.5 h-3 w-3 rounded-full bg-red-500 ring-2 ring-white"></span>
+                </button>
                 <div class="hidden items-center gap-2 text-sm text-slate-500 lg:flex"><x-icon name="calendar" class="h-4 w-4" /> {{ now()->format('l, j F Y') }}</div>
                 <div class="flex items-center gap-3">
+                    {{-- The bell: everything waiting, with a link to each --}}
+                    <div class="relative" @click.outside="bell = false">
+                        <button type="button" @click="bell = !bell; bell && refresh()" class="relative grid h-9 w-9 place-items-center rounded-full text-slate-600 hover:bg-slate-100" aria-label="Notifications">
+                            <x-icon name="bell" class="h-5 w-5" />
+                            <span x-show="total" @if (! $badges) x-cloak @endif class="absolute -top-0.5 -end-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white ring-2 ring-white" x-text="show(total)">{{ $badges ? \App\Support\Badges::text(array_sum($badges)) : '' }}</span>
+                        </button>
+                        <div x-show="bell" x-cloak x-transition.origin.top.right class="absolute end-0 z-40 mt-2 w-72 overflow-hidden rounded-xl bg-white shadow-xl ring-1 ring-slate-200">
+                            <div class="flex items-center justify-between border-b border-slate-100 px-4 py-2.5 text-sm font-semibold text-slate-800">Waiting for you <span class="text-xs font-normal text-slate-500" x-text="total ? total + ' in all' : ''"></span></div>
+                            <template x-for="item in list" :key="item.route">
+                                <a :href="item.url" wire:navigate @click="bell = false" class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50">
+                                    <span class="grid h-6 min-w-6 place-items-center rounded-full bg-red-500 px-1.5 text-[11px] font-bold text-white" x-text="show(item.count)"></span>
+                                    <span class="flex-1" x-text="item.label.replace(/^\d+ /, '')"></span>
+                                    <x-icon name="chevron-right" class="h-4 w-4 text-slate-400" />
+                                </a>
+                            </template>
+                            <p x-show="!list.length" class="flex items-center gap-2 px-4 py-5 text-sm text-slate-500"><x-icon name="check-circle" class="h-5 w-5 text-emerald-600" /> All done. Nothing waiting.</p>
+                        </div>
+                    </div>
                     <div class="hidden text-end sm:block">
                         <div class="text-sm font-medium text-slate-800">{{ $user->name }}</div>
                         <div class="text-xs text-slate-500">{{ $roleLabel }}</div>

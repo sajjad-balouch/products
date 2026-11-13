@@ -57,3 +57,21 @@ Isi zip mein hai. Database mein koi tabdeeli nahi. Phone ki app (APK) dobara ins
 - **Shop ka page:** Call, WhatsApp, raasta (Google Maps), udhaar, pichle orders, "Order".
 - **Orders:** din ke hisaab se (Aaj, Kal...), order ka status (Taken → Sent → Accepted → Sale), aur "Order the same again".
 - Phone ka **Back** button pichli screen par le jata hai (pehle app band ho jati thi). Neeche khenchne se update hota hai.
+
+## Count bubbles (ginti ke laal nishan)
+Isi zip mein hai. Database mein koi tabdeeli nahi.
+- **Web panel:** menu mein har cheez ke sath laal ginti:
+  - salesmen ke naye orders;
+  - late qisten;
+  - bhejne wale messages / "not sent";
+  - payment proofs;
+  - nayi admission inquiries;
+  - website ke unread messages;
+  - owner panel mein aaj naakaam SMS.
+- Upar **ghanti** par kul ginti. Dabane se list khulti hai, har cheez ka link ke sath.
+- Mobile par "Menu" button par laal dot. Browser tab ke naam mein bhi ginti, masalan "(11) Dashboard".
+- Har minute khud update hoti hai.
+- **Sales app:** upar ghanti aur Orders tab par ginti.
+  - Owner ke liye: manzoor karne wale orders.
+  - Salesman ke liye: na bheje gaye orders.
+  - Phone ijazat de to app ke icon par bhi.
