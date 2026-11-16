@@ -2,7 +2,7 @@
     @if ($children->count() > 1)
         <div class="mb-3 flex gap-2 overflow-x-auto pb-1" role="group" aria-label="{{ __('Choose a child') }}">
             @foreach ($children as $c)
-                <button wire:click="$set('childId', {{ $c->id }})" @class(['flex shrink-0 items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-medium', 'border-brand-600 bg-brand-600 text-white' => $child?->id === $c->id, 'border-slate-300 bg-white text-slate-700' => $child?->id !== $c->id]) aria-pressed="{{ $child?->id === $c->id ? 'true' : 'false' }}">
+                <button wire:click="$set('childId', {{ $c->id }})" @class(['flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-semibold shadow-soft', 'border-brand-600 bg-brand-600 text-white' => $child?->id === $c->id, 'border-slate-300 bg-white text-slate-700' => $child?->id !== $c->id]) aria-pressed="{{ $child?->id === $c->id ? 'true' : 'false' }}">
                     <x-icon name="users" class="h-4 w-4" /> {{ $c->name }}
                 </button>
             @endforeach
@@ -10,18 +10,20 @@
     @endif
 
     @if ($child)
-        <div class="mb-4 flex items-center gap-3 rounded-2xl bg-gradient-to-br from-brand-700 to-brand-900 p-4 text-white shadow-sm">
-            <div class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/15 text-lg font-bold ring-2 ring-white/20">{{ collect(explode(' ', $child->name))->take(2)->map(fn ($w) => mb_substr($w, 0, 1))->implode('') }}</div>
-            <div class="min-w-0">
-                <div class="truncate text-lg font-bold" dir="auto">{{ $child->name }}</div>
+        <div class="relative mb-4 flex items-center gap-4 overflow-hidden rounded-3xl bg-brand-900 p-5 text-white shadow-lift">
+            <div class="bg-dots pointer-events-none absolute inset-0 opacity-60"></div>
+            <div class="pointer-events-none absolute -end-10 -top-12 h-40 w-40 rounded-full bg-accent-500/25 blur-2xl"></div>
+            <div class="relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-accent-400 to-accent-600 text-lg font-bold shadow-lg ring-2 ring-white/20">{{ collect(explode(' ', $child->name))->take(2)->map(fn ($w) => mb_substr($w, 0, 1))->implode('') }}</div>
+            <div class="relative min-w-0">
+                <div class="font-display truncate text-xl font-extrabold" dir="auto">{{ $child->name }}</div>
                 <div class="truncate text-sm text-white/80">{{ $child->section->label }}</div>
             </div>
         </div>
     @endif
 
-    <nav class="sticky top-14 z-20 -mx-4 mb-4 grid grid-cols-5 border-b border-slate-200 bg-slate-100/95 px-2 backdrop-blur" aria-label="{{ __('Sections') }}">
+    <nav class="sticky top-[68px] z-20 mb-4 grid grid-cols-5 gap-1 rounded-2xl border border-slate-200/80 bg-white/90 p-1 shadow-soft backdrop-blur" aria-label="{{ __('Sections') }}">
         @foreach (['today' => ['Today', 'home'], 'fees' => ['Fees', 'wallet'], 'attendance' => ['Attendance', 'check-square'], 'results' => ['Results', 'trophy'], 'diary' => ['Diary', 'book-open']] as $key => [$label, $icon])
-            <button wire:click="$set('tab', '{{ $key }}')" @class(['flex flex-col items-center gap-0.5 border-b-2 px-1 py-2 text-[11px] sm:text-xs', 'border-brand-600 font-semibold text-brand-700' => $tab === $key, 'border-transparent text-slate-500' => $tab !== $key]) @if ($tab === $key) aria-current="page" @endif>
+            <button wire:click="$set('tab', '{{ $key }}')" @class(['flex flex-col items-center gap-0.5 rounded-xl px-1 py-2 text-[11px] font-medium transition sm:text-xs', 'bg-brand-600 font-semibold text-white shadow-soft' => $tab === $key, 'text-slate-500 hover:bg-slate-50' => $tab !== $key]) @if ($tab === $key) aria-current="page" @endif>
                 <x-icon :name="$icon" class="h-5 w-5" />{{ __($label) }}
             </button>
         @endforeach

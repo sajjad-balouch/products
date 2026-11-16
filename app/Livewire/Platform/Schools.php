@@ -62,7 +62,7 @@ class Schools extends Component
         ], [], ['school' => 'school name', 'name' => 'admin name', 'monthlyFee' => 'monthly fee', 'freeDays' => 'free days']);
 
         $password = Str::password(10, symbols: false);
-        $admin = $provisioner->create(['school' => $this->school, 'type' => $this->type, 'name' => $this->name, 'email' => $this->email, 'phone' => $this->phone, 'password' => $password]);
+        $admin = $provisioner->create(['school' => $this->school, 'type' => $this->type, 'name' => $this->name, 'email' => $this->email, 'phone' => $this->phone, 'password' => $password], starterData: true);
         $admin->update(['must_change_password' => true]);
         $until = now()->addDays((int) $this->freeDays);
         $admin->school->update(['monthly_fee' => (int) $this->monthlyFee, 'trial_ends_at' => $until, 'access_until' => $until]);

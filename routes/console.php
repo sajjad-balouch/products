@@ -3,7 +3,9 @@
 use App\Models\School;
 use App\Services\FeeService;
 use App\Services\SiteBuilder;
+use App\Services\StarterData;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schedule;
 
 Artisan::command('fees:late', function (FeeService $fees) {
@@ -15,6 +17,26 @@ Artisan::command('fees:late', function (FeeService $fees) {
 })->purpose('Recalculate late fees on overdue vouchers for every school');
 
 Schedule::command('fees:late')->dailyAt('00:30');
+
+// New accounts get this when they are created. For older accounts it fills only areas that are still empty
+// (no classes, no subjects, no products...), so it never duplicates what a school or business set up itself.
+Artisan::command('accounts:starter-data {school? : one account id; leave out for all} {--dry-run : only list what is empty}', function (StarterData $starter) {
+    $schools = School::query()->when($this->argument('school'), fn ($q, $id) => $q->whereKey($id))->orderBy('id')->get();
+
+    foreach ($schools as $school) {
+        if ($this->option('dry-run')) {
+            $empty = $school->isBusiness()
+                ? array_keys(array_filter(['products' => ! DB::table('biz_products')->where('school_id', $school->id)->exists(), 'categories' => ! DB::table('biz_categories')->where('school_id', $school->id)->exists()]))
+                : array_keys(array_filter(['classes' => ! DB::table('school_classes')->where('school_id', $school->id)->exists(), 'fee heads' => ! DB::table('fee_heads')->where('school_id', $school->id)->exists(), 'sessions' => ! DB::table('academic_sessions')->where('school_id', $school->id)->exists()]));
+            $this->line("#{$school->id} {$school->name} ({$school->type}): ".($empty ? 'empty: '.implode(', ', $empty) : 'nothing missing'));
+
+            continue;
+        }
+
+        $added = $starter->seed($school);
+        $this->line("#{$school->id} {$school->name}: ".($added ? collect($added)->map(fn ($n, $area) => "$n $area")->implode(', ') : 'nothing to add'));
+    }
+})->purpose('Add the default classes/subjects (school) or catalog/products (business) to accounts that have none yet');
 
 Artisan::command('site:business-page', function (SiteBuilder $builder) {
     $page = $builder->addBusinessProductPage($builder->platform());

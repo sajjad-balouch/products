@@ -2,13 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\AcademicSession;
-use App\Models\FeeHead;
 use App\Models\School;
-use App\Models\Timetable;
 use App\Models\User;
-use App\Services\Biz\ChartOfAccounts;
-use App\Services\Biz\StarterCatalog;
 use App\Support\BusinessKinds;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -17,9 +12,9 @@ use Illuminate\Support\Str;
 class SchoolProvisioner
 {
     /** @param array{school: string, type: string, name: string, email: string, phone: string, password: string} $data */
-    public function create(array $data): User
+    public function create(array $data, bool $starterData = false): User
     {
-        return DB::transaction(function () use ($data) {
+        return DB::transaction(function () use ($data, $starterData) {
             $school = School::create([
                 'name' => $data['school'],
                 'slug' => $this->uniqueSlug($data['school']),
@@ -34,29 +29,10 @@ class SchoolProvisioner
                 'features_off' => ['sms'], // automatic SMS costs money: it comes with a plan that includes it
             ]);
 
-            // A business gets its chart of accounts instead of classes, sessions and fee heads.
-            if ($school->isBusiness()) {
-                ChartOfAccounts::seed($school);
-                // Only what this kind of business sells: a mobile shop gets phones and accessories, not motorcycles.
-                StarterCatalog::seed($school->id, $school->business_kind);
-
-                return $this->admin($school, $data);
-            }
-
-            $year = now()->month >= 8 ? now()->year : now()->year - 1;
-            AcademicSession::create([
-                'school_id' => $school->id,
-                'name' => $year.'-'.substr((string) ($year + 1), -2),
-                'starts_on' => "$year-08-01",
-                'ends_on' => ($year + 1).'-07-31',
-                'is_current' => true,
-            ]);
-
-            foreach (['Tuition Fee' => true, 'Admission Fee' => false, 'Annual Charges' => false, 'Exam Fee' => false] as $head => $monthly) {
-                FeeHead::create(['school_id' => $school->id, 'name' => $head, 'is_monthly' => $monthly]);
-            }
-
-            Timetable::create(['school_id' => $school->id, 'name' => 'Main timetable', 'is_active' => true]);
+            // Always: a school's session, fee heads and timetable; a business's chart of accounts and catalog for its kind.
+            // With $starterData (sign-up and the owner panel): also classes with section A, subjects and periods,
+            // or a few starter products. Seeders and tests that build their own classes leave it off.
+            app(StarterData::class)->seed($school, $starterData);
 
             return $this->admin($school, $data);
         });

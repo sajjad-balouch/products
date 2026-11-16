@@ -62,7 +62,7 @@ class Signup extends Component
         }
         RateLimiter::hit($key, 3600);
 
-        $user = $provisioner->create($data);
+        $user = $provisioner->create($data, starterData: true);
         Auth::login($user);
         session()->regenerate();
 

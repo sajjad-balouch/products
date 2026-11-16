@@ -56,6 +56,7 @@
         'plus' => '<path d="M12 5v14M5 12h14"/>',
         'arrow-right' => '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
         'chevron-right' => '<path d="m9 6 6 6-6 6"/>',
+        'search' => '<circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.5-4.5"/>',
         'check-circle' => '<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 10"/>',
         'x-circle' => '<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
         'phone' => '<path d="M5 3.5h3.5l1.5 4.5-2.2 1.5a11 11 0 0 0 6.7 6.7l1.5-2.2 4.5 1.5V19a1.5 1.5 0 0 1-1.5 1.5A16.5 16.5 0 0 1 3.5 5 1.5 1.5 0 0 1 5 3.5Z"/>',
