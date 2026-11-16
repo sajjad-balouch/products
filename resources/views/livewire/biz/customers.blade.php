@@ -14,9 +14,14 @@
                 @forelse ($customers as $customer)
                     <tr wire:key="c-{{ $customer->id }}">
                         <td>
-                            <a class="font-medium text-brand-600 hover:underline" href="{{ route('biz.customer', $customer) }}" wire:navigate>{{ $customer->name }}</a>
-                            @if ($customer->is_blacklisted)<span class="badge badge-red ms-1">Blacklisted</span>@endif
-                            <div class="text-xs text-slate-500">{{ $customer->code }}{{ $customer->father_name ? ' · s/o '.$customer->father_name : '' }}</div>
+                            <div class="flex items-center gap-3">
+                                <x-avatar :name="$customer->name" />
+                                <div class="min-w-0">
+                                    <a class="font-medium text-brand-600 hover:underline" href="{{ route('biz.customer', $customer) }}" wire:navigate>{{ $customer->name }}</a>
+                                    @if ($customer->is_blacklisted)<span class="badge badge-red ms-1">Blacklisted</span>@endif
+                                    <div class="text-xs text-slate-500">{{ $customer->code }}{{ $customer->father_name ? ' · s/o '.$customer->father_name : '' }}</div>
+                                </div>
+                            </div>
                         </td>
                         <td dir="ltr">{{ $customer->phone }}</td>
                         <td class="font-mono text-xs">{{ $customer->cnic }}</td>

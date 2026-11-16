@@ -19,9 +19,14 @@
                 @php($m = $month[$e->id])
                 <tr wire:key="e-{{ $e->id }}" @class(['opacity-60' => ! $e->is_active])>
                     <td>
-                        <a class="font-medium text-brand-600 hover:underline" href="{{ route('biz.employee', $e) }}" wire:navigate>{{ $e->name }}</a>
-                        @if ($e->is_salesman)<span class="badge badge-green ms-1">Salesman</span>@endif
-                        <div class="text-xs text-slate-500">{{ $e->code }}{{ $e->phone ? ' · '.$e->phone : '' }}</div>
+                        <div class="flex items-center gap-3">
+                            <x-avatar :name="$e->name" />
+                            <div class="min-w-0">
+                                <a class="font-medium text-brand-600 hover:underline" href="{{ route('biz.employee', $e) }}" wire:navigate>{{ $e->name }}</a>
+                                @if ($e->is_salesman)<span class="badge badge-green ms-1">Salesman</span>@endif
+                                <div class="text-xs text-slate-500">{{ $e->code }}{{ $e->phone ? ' · '.$e->phone : '' }}</div>
+                            </div>
+                        </div>
                     </td>
                     <td>{{ $e->designation }}</td>
                     <td class="text-end">{{ rs($e->salary) }}</td>

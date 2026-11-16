@@ -28,7 +28,7 @@
                 @forelse ($students as $student)
                     <tr wire:key="s-{{ $student->id }}">
                         <td class="font-mono text-xs">{{ $student->admission_no }}</td>
-                        <td><a class="font-medium text-brand-600 hover:underline" href="{{ route('students.show', $student) }}" wire:navigate>{{ $student->name }}</a></td>
+                        <td><div class="flex items-center gap-3"><x-avatar :name="$student->name" size="sm" /><a class="font-medium text-brand-600 hover:underline" href="{{ route('students.show', $student) }}" wire:navigate>{{ $student->name }}</a></div></td>
                         <td>{{ $student->section->label }}</td>
                         <td>{{ $student->father_name ?: $student->guardian->name }}</td>
                         <td>{{ $student->guardian->phone }}</td>

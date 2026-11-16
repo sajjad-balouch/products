@@ -8,7 +8,7 @@
 <div data-modal class="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-slate-950/55 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="{{ $title }}"
      @if ($closeJs) x-data x-on:keydown.escape.window="{{ $closeJs }}" @endif>
     <div class="flex min-h-full items-end justify-center sm:items-center sm:p-4">
-        <div class="flex max-h-[92dvh] w-full {{ $width }} flex-col rounded-t-3xl bg-white shadow-2xl ring-1 ring-slate-900/5 sm:max-h-[calc(100dvh-2rem)] sm:rounded-2xl">
+        <div class="flex max-h-[92dvh] w-full {{ $width }} flex-col rounded-t-3xl bg-white shadow-2xl ring-1 ring-slate-900/5 sm:max-h-[calc(100dvh-2rem)] sm:rounded-3xl">
             <div class="flex shrink-0 items-center justify-between gap-3 border-b border-slate-100 px-5 py-4">
                 <h2 class="font-display min-w-0 truncate text-base font-bold tracking-tight text-slate-900">{{ $title }}</h2>
                 @if ($close)

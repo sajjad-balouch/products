@@ -20,8 +20,13 @@
                     @php($owed = $balances[$v->id] ?? 0)
                     <tr wire:key="v-{{ $v->id }}" @class(['opacity-60' => ! $v->is_active])>
                         <td>
-                            <a class="font-medium text-brand-600 hover:underline" href="{{ route('biz.vendor', $v) }}" wire:navigate>{{ $v->name }}</a>
-                            <div class="text-xs text-slate-500">{{ $v->code }}{{ $v->company ? ' · '.$v->company : '' }}</div>
+                            <div class="flex items-center gap-3">
+                                <x-avatar :name="$v->name" />
+                                <div class="min-w-0">
+                                    <a class="font-medium text-brand-600 hover:underline" href="{{ route('biz.vendor', $v) }}" wire:navigate>{{ $v->name }}</a>
+                                    <div class="text-xs text-slate-500">{{ $v->code }}{{ $v->company ? ' · '.$v->company : '' }}</div>
+                                </div>
+                            </div>
                         </td>
                         <td dir="ltr">{{ $v->phone }}</td>
                         <td @class(['text-end font-semibold', 'text-red-700' => $owed > 0, 'text-slate-500' => $owed <= 0])>{{ rs($owed) }}</td>
